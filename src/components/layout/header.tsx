@@ -10,7 +10,7 @@ export function AppHeader() {
         <div className="mr-4 flex items-center">
           <Link href="/" className="flex items-center space-x-2">
             <BookOpenText className="h-6 w-6 text-primary" />
-            <span className="font-bold">Rahnuma Digest</span>
+            <span className="font-bold">Silsila-E Naqshbandia Owaisiah Bangladesh</span>
           </Link>
         </div>
         <nav className="flex items-center space-x-6 text-sm font-medium">

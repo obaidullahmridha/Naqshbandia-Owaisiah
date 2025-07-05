@@ -42,8 +42,8 @@ export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col items-center mb-8">
-        <h1 className="text-4xl font-bold text-primary mb-2 font-headline">
-          Welcome to Rahnuma Digest
+        <h1 className="text-4xl font-bold text-primary mb-2 font-headline text-center">
+          Welcome to Silsila-E Naqshbandia Owaisiah Bangladesh
         </h1>
         <p className="text-lg text-muted-foreground">
           Your source for spiritual insights

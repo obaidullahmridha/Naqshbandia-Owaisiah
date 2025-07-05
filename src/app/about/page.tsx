@@ -10,7 +10,7 @@ export default function AboutPage() {
         </h1>
         <Card>
           <CardHeader>
-            <CardTitle>Naqshbandia Owaisiah Bangladesh</CardTitle>
+            <CardTitle>Silsila-E Naqshbandia Owaisiah Bangladesh</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <p className="text-lg text-muted-foreground">

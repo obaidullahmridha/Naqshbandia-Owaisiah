@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Rahnuma Digest",
+  title: "Silsila-E Naqshbandia Owaisiah Bangladesh",
   description:
-    "Articles, Images, and Video Shorts from Naqshbandia Owaisiah Bangladesh.",
+    "Articles, Images, and Video Shorts from Silsila-E Naqshbandia Owaisiah Bangladesh.",
 };
 
 export default function RootLayout({
