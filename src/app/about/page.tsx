@@ -1,0 +1,48 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Mail, MapPin } from "lucide-react";
+
+export default function AboutPage() {
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-primary text-center mb-8 font-headline">
+          About Us
+        </h1>
+        <Card>
+          <CardHeader>
+            <CardTitle>Naqshbandia Owaisiah Bangladesh</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <p className="text-lg text-muted-foreground">
+              We are a spiritual organization dedicated to spreading the
+              timeless teachings of Sufism, focusing on love, peace, and the
+              betterment of humanity. Our content aims to inspire and guide
+              seekers on their spiritual journey.
+            </p>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-primary">
+                Contact & Address
+              </h3>
+              <div className="flex items-start space-x-4">
+                <MapPin className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold font-bengali text-lg">
+                    মিরপুর, ঢাকা, বাংলাদেশ
+                  </p>
+                  <p className="text-muted-foreground">
+                    Mirpur, Dhaka, Bangladesh
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <Mail className="h-6 w-6 text-accent flex-shrink-0" />
+                <p className="text-muted-foreground">contact@rahnumadigest.com</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
