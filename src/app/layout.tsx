@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Silsila-E Naqshbandia Owaisiah Bangladesh",
+  title: "নিসবতে উয়াইসিয়া",
   description:
-    "Articles, Images, and Video Shorts from Silsila-E Naqshbandia Owaisiah Bangladesh.",
+    "নিসবতে উয়াইসিয়া থেকে প্রবন্ধ, ছবি এবং ভিডিও শর্টস।",
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="bn" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

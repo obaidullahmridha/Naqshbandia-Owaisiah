@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Roboto', 'sans-serif'],
-        headline: ['Roboto', 'sans-serif'],
+        body: ['"Noto Serif Bengali"', 'Roboto', 'sans-serif'],
+        headline: ['"Noto Serif Bengali"', 'Roboto', 'sans-serif'],
         bengali: ['"Noto Serif Bengali"', 'serif'],
         arabic: ['"Noto Naskh Arabic"', 'serif'],
         urdu: ['"Noto Nastaliq Urdu"', 'serif'],

@@ -10,7 +10,7 @@ export function AppHeader() {
         <div className="mr-4 flex items-center">
           <Link href="/" className="flex items-center space-x-2">
             <BookOpenText className="h-6 w-6 text-primary" />
-            <span className="font-bold">Silsila-E Naqshbandia Owaisiah Bangladesh</span>
+            <span className="font-bold">নিসবতে উয়াইসিয়া</span>
           </Link>
         </div>
         <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -18,13 +18,13 @@ export function AppHeader() {
             href="/"
             className="transition-colors hover:text-foreground/80 text-foreground"
           >
-            Home
+            হোম
           </Link>
           <Link
             href="/about"
             className="transition-colors hover:text-foreground/80 text-foreground/60"
           >
-            About
+            সম্পর্কে
           </Link>
         </nav>
         <div className="flex flex-1 items-center justify-end space-x-4">

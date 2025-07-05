@@ -23,7 +23,7 @@ export function AppFooter() {
     <footer className="py-6 md:px-8 md:py-0 border-t">
       <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
         <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-          &copy; {new Date().getFullYear()} Silsila-E Naqshbandia Owaisiah Bangladesh. All rights reserved.
+          &copy; {new Date().getFullYear()} নিসবতে উয়াইসিয়া. সর্বস্বত্ব সংরক্ষিত.
         </p>
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
@@ -31,7 +31,7 @@ export function AppFooter() {
               href="https://www.facebook.com/NaqshbandiaOwaisiahBangladesh"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Facebook Page"
+              aria-label="ফেসবুক পেজ"
             >
               <FacebookIcon className="h-5 w-5" />
             </Link>

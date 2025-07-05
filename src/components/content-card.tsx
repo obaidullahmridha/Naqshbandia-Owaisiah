@@ -32,10 +32,24 @@ const getLanguageClass = (lang: Content["language"]) => {
   }
 };
 
+const getTranslatedType = (type: Content["type"]) => {
+  switch (type) {
+    case "article":
+      return "প্রবন্ধ";
+    case "image":
+      return "ছবি";
+    case "video":
+      return "ভিডিও";
+    default:
+      return type;
+  }
+};
+
 export function ContentCard({ content }: ContentCardProps) {
   const { title, description, imageUrl, tags, language, type } = content;
 
   const langClass = getLanguageClass(language);
+  const translatedType = getTranslatedType(type);
 
   const TypeIcon =
     type === "video" ? Film : type === "image" ? ImageIcon : null;
@@ -55,7 +69,7 @@ export function ContentCard({ content }: ContentCardProps) {
             {TypeIcon && (
               <Badge variant="secondary" className="pl-2">
                 <TypeIcon className="h-4 w-4 mr-1" />
-                {type.charAt(0).toUpperCase() + type.slice(1)}
+                {translatedType}
               </Badge>
             )}
           </div>
@@ -80,7 +94,7 @@ export function ContentCard({ content }: ContentCardProps) {
           ))}
         </div>
         <Button variant="link" className="p-0 h-auto self-end">
-          Read More <ArrowRight className="ml-2 h-4 w-4" />
+          আরও পড়ুন <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </CardFooter>
     </Card>
