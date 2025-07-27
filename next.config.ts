@@ -16,6 +16,44 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'blogger.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+       {
+        protocol: 'http',
+        hostname: '1.bp.blogspot.com',
+      },
+      {
+        protocol: 'http',
+        hostname: '2.bp.blogspot.com',
+      },
+      {
+        protocol: 'http',
+        hostname: '3.bp.blogspot.com',
+      },
+      {
+        protocol: 'http',
+        hostname: '4.bp.blogspot.com',
+      },
+       {
+        protocol: 'https',
+        hostname: '1.bp.blogspot.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '2.bp.blogspot.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '3.bp.blogspot.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '4.bp.blogspot.com',
+      },
     ],
   },
 };

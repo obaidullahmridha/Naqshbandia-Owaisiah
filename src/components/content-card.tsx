@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Film, Image as ImageIcon } from "lucide-react";
+import { ArrowRight, Film, Image as ImageIcon, BookOpen } from "lucide-react";
 import type { Content } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -40,6 +40,8 @@ const getTranslatedType = (type: Content["type"]) => {
       return "ছবি";
     case "video":
       return "ভিডিও";
+    case "book":
+      return "বই";
     default:
       return type;
   }
@@ -52,7 +54,13 @@ export function ContentCard({ content }: ContentCardProps) {
   const translatedType = getTranslatedType(type);
 
   const TypeIcon =
-    type === "video" ? Film : type === "image" ? ImageIcon : null;
+    type === "video"
+      ? Film
+      : type === "image"
+      ? ImageIcon
+      : type === "book"
+      ? BookOpen
+      : null;
 
   return (
     <Card className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
@@ -64,6 +72,7 @@ export function ContentCard({ content }: ContentCardProps) {
             fill
             className="object-cover"
             data-ai-hint="spiritual abstract"
+            unoptimized // Using this because blogspot images may not be on a whitelisted domain
           />
           <div className="absolute top-2 right-2 flex items-center gap-2">
             {TypeIcon && (
@@ -80,7 +89,7 @@ export function ContentCard({ content }: ContentCardProps) {
           {title}
         </CardTitle>
         {description && (
-          <CardDescription className={cn("text-sm", langClass)}>
+          <CardDescription className={cn("text-sm", langClass, 'line-clamp-3')}>
             {description}
           </CardDescription>
         )}

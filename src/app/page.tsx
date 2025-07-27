@@ -1,18 +1,39 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ContentCard } from "@/components/content-card";
-import { mockContent, type Content } from "@/lib/data";
+import { getBlogContent, type Content } from "@/lib/data";
 import { Search } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [articles, setArticles] = useState<Content[]>([]);
+  const [images, setImages] = useState<Content[]>([]);
+  const [videos, setVideos] = useState<Content[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredContent = useMemo(() => {
-    if (!searchQuery) return mockContent;
-    return mockContent.filter(
+  useEffect(() => {
+    const fetchContent = async () => {
+      setLoading(true);
+      const [articleData, imageData, videoData] = await Promise.all([
+        getBlogContent("Article"),
+        getBlogContent("Image"),
+        getBlogContent("Video"),
+      ]);
+      setArticles(articleData);
+      setImages(imageData);
+      setVideos(videoData);
+      setLoading(false);
+    };
+    fetchContent();
+  }, []);
+
+  const filterContent = (items: Content[]) => {
+    if (!searchQuery) return items;
+    return items.filter(
       (item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -20,13 +41,29 @@ export default function Home() {
           tag.toLowerCase().includes(searchQuery.toLowerCase())
         )
     );
-  }, [searchQuery]);
+  };
+  
+  const filteredArticles = useMemo(() => filterContent(articles), [articles, searchQuery]);
+  const filteredImages = useMemo(() => filterContent(images), [images, searchQuery]);
+  const filteredVideos = useMemo(() => filterContent(videos), [videos, searchQuery]);
 
-  const articles = filteredContent.filter((item) => item.type === "article");
-  const images = filteredContent.filter((item) => item.type === "image");
-  const videos = filteredContent.filter((item) => item.type === "video");
 
-  const renderContent = (items: Content[]) => {
+  const renderContent = (items: Content[], isLoading: boolean) => {
+    if (isLoading) {
+       return (
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+           {Array.from({ length: 8 }).map((_, i) => (
+             <div key={i} className="flex flex-col space-y-3">
+               <Skeleton className="h-[200px] w-full rounded-xl" />
+               <div className="space-y-2">
+                 <Skeleton className="h-4 w-full" />
+                 <Skeleton className="h-4 w-3/4" />
+               </div>
+             </div>
+           ))}
+         </div>
+       );
+    }
     if (items.length === 0) {
       return <p className="text-center text-muted-foreground mt-8">কোনো বিষয়বস্তু পাওয়া যায়নি।</p>
     }
@@ -68,13 +105,13 @@ export default function Home() {
           <TabsTrigger value="videos">ভিডিও</TabsTrigger>
         </TabsList>
         <TabsContent value="articles" className="mt-6">
-          {renderContent(articles)}
+          {renderContent(filteredArticles, loading)}
         </TabsContent>
         <TabsContent value="images" className="mt-6">
-          {renderContent(images)}
+          {renderContent(filteredImages, loading)}
         </TabsContent>
         <TabsContent value="videos" className="mt-6">
-          {renderContent(videos)}
+          {renderContent(filteredVideos, loading)}
         </TabsContent>
       </Tabs>
     </div>

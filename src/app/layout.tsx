@@ -33,7 +33,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Serif+Bengali:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
-        <meta name="theme-color" content="#2D5913" />
+        <meta name="theme-color" content="#FFF4A4" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0D3307" media="(prefers-color-scheme: dark)" />
       </head>
       <body className={cn("min-h-screen bg-background font-body antialiased")}>
         <ThemeProvider
