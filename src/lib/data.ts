@@ -1,6 +1,6 @@
 export interface Content {
   id: string;
-  type: "article" | "image" | "video" | "book";
+  type: "article" | "image" | "video" | "book" | "about" | "tree" | "zikr";
   title: string;
   description?: string;
   language: "en" | "bn" | "ar" | "ur";
@@ -52,7 +52,7 @@ function mapEntryToContent(entry: any, type: Content['type']): Content {
     title: entry.title.$t,
     description: cleanDescription(contentHtml),
     language: language,
-    tags: tags.filter((t: string) => !["Article", "Image", "Video", "Book", "About", "English", "Arabic", "Urdu"].includes(t)),
+    tags: tags.filter((t: string) => !["Article", "Image", "Video", "Book", "About", "Tree", "Zikr", "English", "Arabic", "Urdu"].includes(t)),
     imageUrl: extractImageUrl(contentHtml),
     videoUrl: extractVideoUrl(contentHtml),
     content: contentHtml,
@@ -61,8 +61,18 @@ function mapEntryToContent(entry: any, type: Content['type']): Content {
   };
 }
 
+const tagToTypeMap: Record<string, Content['type']> = {
+  "Article": "article",
+  "Image": "image",
+  "Video": "video",
+  "Book": "book",
+  "About": "about",
+  "Tree": "tree",
+  "Zikr": "zikr"
+};
 
-export async function getBlogContent(tag: "Article" | "Image" | "Video" | "Book" | "About"): Promise<Content[]> {
+
+export async function getBlogContent(tag: "Article" | "Image" | "Video" | "Book" | "About" | "Tree" | "Zikr"): Promise<Content[]> {
   try {
     const res = await fetch(`${BLOG_URL}/feeds/posts/default/-/${tag}?alt=json&max-results=50`);
     if (!res.ok) {
@@ -73,10 +83,7 @@ export async function getBlogContent(tag: "Article" | "Image" | "Video" | "Book"
       return [];
     }
     
-    let type: Content['type'] = 'article';
-    if (tag === 'Image') type = 'image';
-    if (tag === 'Video') type = 'video';
-    if (tag === 'Book') type = 'book';
+    const type = tagToTypeMap[tag] || 'article';
     
     return data.feed.entry.map((entry: any) => mapEntryToContent(entry, type));
   } catch (error) {
