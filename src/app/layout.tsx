@@ -36,7 +36,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#FFF4A4" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#0D3307" media="(prefers-color-scheme: dark)" />
       </head>
-      <body className={cn("min-h-screen bg-background font-body antialiased")}>
+      <body className={cn("min-h-screen bg-background font-body antialiased")} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
