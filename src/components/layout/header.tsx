@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { BookOpenText } from "lucide-react";
 
 export function AppHeader() {
   return (
@@ -9,7 +9,7 @@ export function AppHeader() {
       <div className="container flex h-14 items-center">
         <div className="mr-4 flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/logo.png" alt="নিসবতে উয়াইসিয়া" width={24} height={24} />
+            <BookOpenText className="h-6 w-6 text-primary" />
             <span className="font-bold">নিসবতে উয়াইসিয়া</span>
           </Link>
         </div>
