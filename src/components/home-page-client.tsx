@@ -54,7 +54,7 @@ export function HomePageClient({ articles, images, videos }: HomePageClientProps
           নিসবতে উয়াইসিয়াতে স্বাগতম
         </h1>
         <p className="text-lg text-muted-foreground text-center">
-          "জেনে রাখো! আল্লাহর জিকিরেই অন্তরসমূহ প্রশান্তি লাভ করে।" -সূরা রা’দ ২৮
+          "জেনে রাখো! আল্লাহর জিকিরেই অন্তরসমূহ প্রশান্তি লাভ করে।" <sub>-সূরা রা’দ ২৮</sub>
         </p>
       </div>
 
