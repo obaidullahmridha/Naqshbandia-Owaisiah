@@ -35,7 +35,7 @@ function cleanDescription(content: string): string {
   return content.replace(/<[^>]*>/g, "").substring(0, 200) + '...';
 }
 
-function mapEntryToContent(entry: any, type: Content['type']): Content {
+function mapEntryToContent(entry: any, type?: Content['type']): Content {
   const contentHtml = entry.content.$t;
   const tags = entry.category?.map((cat: any) => cat.term) || [];
   
@@ -44,11 +44,22 @@ function mapEntryToContent(entry: any, type: Content['type']): Content {
   if (tags.includes('English')) language = 'en';
   if (tags.includes('Arabic')) language = 'ar';
   if (tags.includes('Urdu')) language = 'ur';
+  
+  let determinedType: Content['type'] = type || 'article';
+  if(!type) {
+    if(tags.includes("Article")) determinedType = 'article';
+    else if(tags.includes("Image")) determinedType = 'image';
+    else if(tags.includes("Video")) determinedType = 'video';
+    else if(tags.includes("Book")) determinedType = 'book';
+    else if(tags.includes("About")) determinedType = 'about';
+    else if(tags.includes("Tree")) determinedType = 'tree';
+    else if(tags.includes("Zikr")) determinedType = 'zikr';
+  }
 
 
   return {
     id: entry.id.$t.split('.post-')[1],
-    type: type,
+    type: determinedType,
     title: entry.title.$t,
     description: cleanDescription(contentHtml),
     language: language,
@@ -57,7 +68,7 @@ function mapEntryToContent(entry: any, type: Content['type']): Content {
     videoUrl: extractVideoUrl(contentHtml),
     content: contentHtml,
     author: entry.author[0].name.$t,
-    date: new Date(entry.published.$t).toISOString().split('T')[0],
+    date: new Date(entry.published.$t).toISOString(),
   };
 }
 
@@ -89,5 +100,22 @@ export async function getBlogContent(tag: "Article" | "Image" | "Video" | "Book"
   } catch (error) {
     console.error("Error fetching blog content:", error);
     return [];
+  }
+}
+
+export async function getPostById(id: string): Promise<Content | null> {
+  try {
+    const res = await fetch(`${BLOG_URL}/feeds/posts/default/${id}?alt=json`);
+     if (!res.ok) {
+      throw new Error(`Failed to fetch post with id: ${id}`);
+    }
+    const data = await res.json();
+    if (!data.entry) {
+        return null;
+    }
+    return mapEntryToContent(data.entry);
+  } catch (error) {
+    console.error(`Error fetching post with id ${id}:`, error);
+    return null;
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -48,7 +49,7 @@ const getTranslatedType = (type: Content["type"]) => {
 };
 
 export function ContentCard({ content }: ContentCardProps) {
-  const { title, description, imageUrl, tags, language, type } = content;
+  const { id, title, description, imageUrl, tags, language, type } = content;
 
   const langClass = getLanguageClass(language);
   const translatedType = getTranslatedType(type);
@@ -61,32 +62,38 @@ export function ContentCard({ content }: ContentCardProps) {
       : type === "book"
       ? BookOpen
       : null;
+      
+  const postUrl = `/${type}/${id}`;
 
   return (
     <Card className="flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
       <CardHeader className="p-0">
-        <div className="relative aspect-video">
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            className="object-cover"
-            data-ai-hint="spiritual abstract"
-            unoptimized // Using this because blogspot images may not be on a whitelisted domain
-          />
-          <div className="absolute top-2 right-2 flex items-center gap-2">
-            {TypeIcon && (
-              <Badge variant="secondary" className="pl-2">
-                <TypeIcon className="h-4 w-4 mr-1" />
-                {translatedType}
-              </Badge>
-            )}
+        <Link href={postUrl}>
+          <div className="relative aspect-video">
+            <Image
+              src={imageUrl}
+              alt={title}
+              fill
+              className="object-cover"
+              data-ai-hint="spiritual abstract"
+              unoptimized // Using this because blogspot images may not be on a whitelisted domain
+            />
+            <div className="absolute top-2 right-2 flex items-center gap-2">
+              {TypeIcon && (
+                <Badge variant="secondary" className="pl-2">
+                  <TypeIcon className="h-4 w-4 mr-1" />
+                  {translatedType}
+                </Badge>
+              )}
+            </div>
           </div>
-        </div>
+        </Link>
       </CardHeader>
       <CardContent className="p-4 flex-grow">
         <CardTitle className={cn("text-lg mb-2 leading-tight", langClass)}>
-          {title}
+          <Link href={postUrl} className="hover:underline">
+            {title}
+          </Link>
         </CardTitle>
         {description && (
           <CardDescription className={cn("text-sm", langClass, 'line-clamp-3')}>
@@ -102,9 +109,11 @@ export function ContentCard({ content }: ContentCardProps) {
             </Badge>
           ))}
         </div>
-        <Button variant="link" className="p-0 h-auto self-end">
-          আরও পড়ুন <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        <Link href={postUrl} className="self-end">
+            <Button variant="link" className="p-0 h-auto">
+                পুরোটা পড়ুন <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
