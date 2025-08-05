@@ -36,6 +36,27 @@ function cleanDescription(content: string): string {
   return content.replace(/<[^>]*>/g, "").substring(0, 200) + '...';
 }
 
+const tagToTypeMap: Record<string, Content['type']> = {
+  "Article": "article",
+  "Image": "image",
+  "Video": "video",
+  "Book": "book",
+  "About": "about",
+  "Tree": "tree",
+  "Zikr": "zikr"
+};
+
+function determineTypeFromTags(tags: string[]): Content['type'] {
+    if (tags.includes("Video")) return "video";
+    if (tags.includes("Image")) return "image";
+    if (tags.includes("Book")) return "book";
+    if (tags.includes("About")) return "about";
+    if (tags.includes("Tree")) return "tree";
+    if (tags.includes("Zikr")) return "zikr";
+    if (tags.includes("Article")) return "article";
+    return "article"; // Default to article
+}
+
 function mapEntryToContent(entry: any, type?: Content['type']): Content {
   const contentHtml = entry.content.$t;
   const tags = entry.category?.map((cat: any) => cat.term) || [];
@@ -46,16 +67,7 @@ function mapEntryToContent(entry: any, type?: Content['type']): Content {
   if (tags.includes('Arabic')) language = 'ar';
   if (tags.includes('Urdu')) language = 'ur';
   
-  let determinedType: Content['type'] = type || 'article';
-  if(!type) {
-    if(tags.includes("Article")) determinedType = 'article';
-    else if(tags.includes("Image")) determinedType = 'image';
-    else if(tags.includes("Video")) determinedType = 'video';
-    else if(tags.includes("Book")) determinedType = 'book';
-    else if(tags.includes("About")) determinedType = 'about';
-    else if(tags.includes("Tree")) determinedType = 'tree';
-    else if(tags.includes("Zikr")) determinedType = 'zikr';
-  }
+  const determinedType = type || determineTypeFromTags(tags);
 
 
   return {
@@ -73,16 +85,6 @@ function mapEntryToContent(entry: any, type?: Content['type']): Content {
   };
 }
 
-const tagToTypeMap: Record<string, Content['type']> = {
-  "Article": "article",
-  "Image": "image",
-  "Video": "video",
-  "Book": "book",
-  "About": "about",
-  "Tree": "tree",
-  "Zikr": "zikr"
-};
-
 
 export async function getBlogContent(tag: "Article" | "Image" | "Video" | "Book" | "About" | "Tree" | "Zikr"): Promise<Content[]> {
   try {
@@ -95,7 +97,7 @@ export async function getBlogContent(tag: "Article" | "Image" | "Video" | "Book"
       return [];
     }
     
-    const type = tagToTypeMap[tag] || 'article';
+    const type = tagToTypeMap[tag];
     
     return data.feed.entry.map((entry: any) => mapEntryToContent(entry, type));
   } catch (error) {
