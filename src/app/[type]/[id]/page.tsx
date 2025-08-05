@@ -2,13 +2,9 @@ import { getPostById } from "@/lib/data";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
-import { bn } from "date-fns/locale";
 
 export default async function PostPage({
   params,
@@ -20,8 +16,6 @@ export default async function PostPage({
   if (!post) {
     return <div className="container py-8">পোস্টটি খুঁজে পাওয়া যায়নি।</div>;
   }
-  
-  const formattedDate = format(new Date(post.date), "PPP", { locale: bn });
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -31,11 +25,6 @@ export default async function PostPage({
             <h1 className="text-4xl font-bold text-primary mb-2 font-headline text-center">
               {post.title}
             </h1>
-            <div className="text-center text-muted-foreground text-sm flex justify-center items-center gap-4">
-              <span>{post.author}</span>
-              <span>&bull;</span>
-              <time dateTime={post.date}>{formattedDate}</time>
-            </div>
           </header>
           <Card>
             <CardContent className="p-6 max-w-none">
