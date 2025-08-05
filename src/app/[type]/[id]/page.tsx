@@ -38,7 +38,7 @@ export default async function PostPage({
             </div>
           </header>
           <Card>
-            <CardContent className="p-6 prose dark:prose-invert max-w-none">
+            <CardContent className="p-6 max-w-none">
               {post.videoUrl && post.type === "video" ? (
                 <div className="aspect-video mb-6">
                   <iframe
