@@ -13,11 +13,6 @@ export const metadata: Metadata = {
   description:
     "নিসবতে উয়াইসিয়া থেকে প্রবন্ধ, ছবি এবং ভিডিও শর্টস।",
   manifest: "/manifest.json",
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
-  }
 };
 
 export default function RootLayout({
