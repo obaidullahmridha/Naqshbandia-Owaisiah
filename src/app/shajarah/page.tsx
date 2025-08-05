@@ -17,7 +17,7 @@ export default async function ShajarahPage() {
           <CardHeader>
             <CardTitle>{post ? post.title : "সিলসিলা-ই আলিয়া নকশবন্দিয়া উয়াইসিয়া"}</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6 prose dark:prose-invert max-w-none">
+          <CardContent className="space-y-6 max-w-none">
             {post ? (
               <div dangerouslySetInnerHTML={{ __html: post.content || "" }} />
             ) : (

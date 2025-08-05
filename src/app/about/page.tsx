@@ -17,7 +17,7 @@ export default async function AboutPage() {
           <CardHeader>
             <CardTitle>{post ? post.title : "আমাদের সম্পর্কে"}</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6 prose dark:prose-invert max-w-none">
+          <CardContent className="space-y-6 max-w-none">
             {post ? (
               <div dangerouslySetInnerHTML={{ __html: post.content || "" }} />
             ) : (
