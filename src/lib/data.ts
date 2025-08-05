@@ -1,3 +1,4 @@
+
 export interface Content {
   id: string;
   type: "article" | "image" | "video" | "book" | "about" | "tree" | "zikr";
@@ -85,7 +86,7 @@ const tagToTypeMap: Record<string, Content['type']> = {
 
 export async function getBlogContent(tag: "Article" | "Image" | "Video" | "Book" | "About" | "Tree" | "Zikr"): Promise<Content[]> {
   try {
-    const res = await fetch(`${BLOG_URL}/feeds/posts/default/-/${tag}?alt=json&max-results=50`);
+    const res = await fetch(`${BLOG_URL}/feeds/posts/default/-/${tag}?alt=json&max-results=50`, { cache: 'no-store' });
     if (!res.ok) {
       throw new Error(`Failed to fetch blog content for tag: ${tag}`);
     }
@@ -105,7 +106,7 @@ export async function getBlogContent(tag: "Article" | "Image" | "Video" | "Book"
 
 export async function getPostById(id: string): Promise<Content | null> {
   try {
-    const res = await fetch(`${BLOG_URL}/feeds/posts/default/${id}?alt=json`);
+    const res = await fetch(`${BLOG_URL}/feeds/posts/default/${id}?alt=json`, { cache: 'no-store' });
      if (!res.ok) {
       throw new Error(`Failed to fetch post with id: ${id}`);
     }

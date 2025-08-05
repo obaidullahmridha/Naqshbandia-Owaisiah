@@ -55,15 +55,17 @@ export default async function PostPage({
                 />
               )}
             </CardContent>
-            <CardHeader>
-                <div className="flex flex-wrap gap-2 mt-4">
-                    {post.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary">
-                        {tag}
-                        </Badge>
-                    ))}
-                </div>
-            </CardHeader>
+            {post.tags.length > 0 && (
+                <CardHeader>
+                    <div className="flex flex-wrap gap-2 mt-4">
+                        {post.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary">
+                            {tag}
+                            </Badge>
+                        ))}
+                    </div>
+                </CardHeader>
+            )}
           </Card>
         </article>
       </div>
